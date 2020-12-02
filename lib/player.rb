@@ -9,7 +9,8 @@ class Player
     end
 
     def position_ship(ship, y_index, x_index)
-        @board[y_index][x_index] = ship
+        upper_index = x_index + ship.size - 1
+        @board[y_index][x_index..upper_index] = @board[y_index][x_index..upper_index].map{ |square| square = ship}
         @unpositioned_ships.delete(ship)
     end
 
