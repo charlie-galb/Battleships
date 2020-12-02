@@ -1,3 +1,6 @@
+require_relative 'carrier'
+require_relative 'destroyer'
+
 class Player
 
     attr_reader :board, :unpositioned_ships
