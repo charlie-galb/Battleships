@@ -1,16 +1,16 @@
 class Player
 
-    def initialize()
+    attr_reader :board, :unpositioned_ships
+
+    def initialize(unpositioned_ships = [Carrier.new, Destroyer.new])
         @board = Array.new(8) {Array.new(8)}
-        @carrier = "carrier"
+        @unpositioned_ships = unpositioned_ships
+        @active_ships = []
     end
 
-    def display_board
-        return @board
-    end
-
-    def position_carrier(y_index, x_index)
-        @board[y_index][x_index] = @carrier
+    def position_ship(ship, y_index, x_index)
+        @board[y_index][x_index] = ship
+        @unpositioned_ships.delete(ship)
     end
 
 end
