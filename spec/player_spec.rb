@@ -18,7 +18,7 @@ describe Player do
                 player.position_ship(destroyer, 1, 0)
                 expect(player.board[1][0]).to eq destroyer
                 expect(player.board[1][3]).to eq destroyer
-                expect(player.board[1][4]).to eq nil
+                expect(player.board[1][4]).to eq "O"
                 expect(player.unpositioned_ships).to be_empty
             end
         end
