@@ -30,13 +30,13 @@ class Game
             ship_index = gets.chomp
             puts "Vertical or horizontal?"
             orientation = gets.chomp
-            puts "Type the coordinates, sepearated by a space, of the square where you want to position it."
-            indeces = gets.chomp
-            indeces.split(" ")
+            puts "Where on the x-axis would you like to place it?"
+            x_index = gets.chomp
+            puts "Where on the y-axis would you like to place it?"
+            y_index = gets.chomp
             ship = player_1.unpositioned_ships[ship_index.to_i]
-            x_index = indeces[0].to_i
-            y_index = indeces[1].to_i
-            @player_1.position_ship(ship, orientation, y_index, x_index)
+            @player_1.position_ship(ship, orientation, y_index.to_i, x_index.to_i)
+            p @player_1.board
         end
     end
 end
