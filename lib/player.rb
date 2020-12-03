@@ -6,7 +6,7 @@ class Player
     attr_reader :board, :unpositioned_ships
 
     def initialize(unpositioned_ships = [Carrier.new, Destroyer.new])
-        @board = Array.new(8) {Array.new(8)}
+        @board = Array.new(8) {Array.new(8) {"O"}}
         @unpositioned_ships = unpositioned_ships
         @active_ships = []
     end
