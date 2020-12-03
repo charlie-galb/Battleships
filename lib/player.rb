@@ -24,15 +24,14 @@ class Player
 
     def position_horizontally(ship, y_index, x_index)
         upper_index = x_index + ship.size - 1
-        @board[y_index][x_index..upper_index] = @board[y_index][x_index..upper_index].map{ |square| square = ship}
+        squares_to_occupy = (x_index..upper_index).to_a
+        squares_to_occupy.each{ |square| @board[y_index][square] = ship if square < 8 }
     end
 
     def position_vertically(ship, y_index, x_index)
         upper_index = y_index + ship.size - 1
-        squares_to_occupy = (y_index..upper_index)
-        @board =  @board.each.with_index do |row, index| 
-            row[x_index] = ship if squares_to_occupy.include?(index)
-        end
+        squares_to_occupy = (y_index..upper_index).to_a
+        squares_to_occupy.each{ |square| @board[square][x_index] = ship if square < 8 }
     end
 
 end
