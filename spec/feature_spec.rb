@@ -12,12 +12,12 @@ describe 'Features' do
         io = StringIO.new
         io.puts"1"
         io.puts"Vertical"
-        io.puts"3"
         io.puts"4"
+        io.puts"3"
         io.puts"0"
         io.puts"Horizontal"
-        io.puts"6"
         io.puts"1"
+        io.puts"6"
         io.rewind
         $stdin = io
         game.player_1_position_ships
