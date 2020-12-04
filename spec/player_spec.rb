@@ -46,4 +46,22 @@ describe Player do
             end
         end
     end
+
+    describe "#fire" do
+        context "when firing at another player's board" do
+            it "can miss" do
+                allow(destroyer).to receive(:size).and_return(4)
+                allow(carrier).to receive(:size).and_return(5)
+                player_1 = Player.new([carrier, destroyer])
+                player_2 = Player.new([carrier, destroyer])
+                allow(destroyer).to receive(:size).and_return(4)
+                allow(carrier).to receive(:size).and_return(5)
+                player_1.position_ship(carrier, "Horizontal", 0, 0)
+                player_1.position_ship(destroyer, "Horizontal", 1, 0)
+                player_2.position_ship(carrier, "Vertical", 0, 0)
+                player_2.position_ship(destroyer, "Vertical", 0, 1)
+                expect(player_1.fire(player_2, 0, 3)).to eq "Miss"
+            end
+        end
+    end
 end
