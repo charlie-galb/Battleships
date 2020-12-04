@@ -36,7 +36,6 @@ class Game
             x_index = gets.chomp
             ship = player_1.unpositioned_ships[ship_index.to_i]
             @player_1.position_ship(ship, orientation, y_index.to_i, x_index.to_i)
-            p @player_1.board
         end
     end
 end
