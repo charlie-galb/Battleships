@@ -24,17 +24,25 @@ describe Player do
                 expect(player.board[7][0]).to eq "O"
                 expect(player.unpositioned_ships).to eq [carrier]
             end
-            it "raises in error if a player tries to place ships horizontally off the board" do
+            it "raises an error if a player tries to place ships horizontally off the board" do
                 player = Player.new([carrier, destroyer])
                 allow(destroyer).to receive(:size).and_return(4)
                 expect{ player.position_ship(destroyer, "Vertical", 6, 0)}.to raise_error  "Not enough space to put your ship here!"
                 expect(player.unpositioned_ships).to eq [carrier, destroyer]
             end
-            it "raises in error if a player tries to place ships vertically off the board" do
+            it "raises an error if a player tries to place ships vertically off the board" do
                 player = Player.new([carrier, destroyer])
                 allow(destroyer).to receive(:size).and_return(4)
                 expect{ player.position_ship(destroyer, "Horizontal", 6, 6)}.to raise_error  "Not enough space to put your ship here!"
                 expect(player.unpositioned_ships).to eq [carrier, destroyer]
+            end
+            it "raises an error if a player tries to place ships on top of each other" do
+                player = Player.new([carrier, destroyer])
+                allow(destroyer).to receive(:size).and_return(4)
+                allow(carrier).to receive(:size).and_return(5)
+                player.position_ship(destroyer, "Horizontal", 6, 0)
+                expect{player.position_ship(carrier, "Vertical", 3, 2)}.to raise_error(RuntimeError, /Space already/)
+                expect(player.unpositioned_ships).to eq [carrier]
             end
         end
     end
