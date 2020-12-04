@@ -30,10 +30,10 @@ class Game
             ship_index = gets.chomp
             puts "Vertical or horizontal?"
             orientation = gets.chomp
-            puts "Where on the x-axis would you like to place it?"
-            x_index = gets.chomp
             puts "Where on the y-axis would you like to place it?"
             y_index = gets.chomp
+            puts "Where on the x-axis would you like to place it?"
+            x_index = gets.chomp
             ship = player_1.unpositioned_ships[ship_index.to_i]
             @player_1.position_ship(ship, orientation, y_index.to_i, x_index.to_i)
             p @player_1.board
