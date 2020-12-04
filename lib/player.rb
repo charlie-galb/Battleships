@@ -27,10 +27,11 @@ class Player
     def take_fire(y_index, x_index)
         if !@board[y_index][x_index].is_a?(String)
             @board[y_index][x_index].take_hit
-            if @board[y_index][x_index].sunk
+            if @board[y_index][x_index].sunk?
                 @board[y_index][x_index] = "X"
                 return "You sunk their battleship!"
             else
+                @board[y_index][x_index] = "X"
                 return "Hit"
             end
         else
