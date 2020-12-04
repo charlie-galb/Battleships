@@ -20,6 +20,19 @@ class Player
         @unpositioned_ships.delete(ship)
     end
 
+    def fire(enemy, y_index, x_index)
+        enemy.take_fire(y_index, x_index)
+    end
+
+    def take_fire(y_index, x_index)
+        if @board[y_index][x_index] != "O"
+            @board[y_index][x_index].take_hit
+            return "Hit"
+        else
+            return "Miss"
+        end
+    end
+
     private 
 
     def position_horizontally(ship, y_index, x_index)
