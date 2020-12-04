@@ -17,7 +17,7 @@ describe 'Features' do
         io.puts"0"
         io.puts"Horizontal"
         io.puts"1"
-        io.puts"6"
+        io.puts"0"
         io.rewind
         $stdin = io
         game.player_1_position_ships
@@ -25,8 +25,8 @@ describe 'Features' do
         expect(game.player_1.board[4][3]).to be_instance_of Destroyer
         expect(game.player_1.board[5][3]).to be_instance_of Destroyer
         expect(game.player_1.board[6][3]).to be_instance_of Destroyer
-        expect(game.player_1.board[1][6]).to be_instance_of Carrier
-        expect(game.player_1.board[1][7]).to be_instance_of Carrier
+        expect(game.player_1.board[1][0]).to be_instance_of Carrier
+        expect(game.player_1.board[1][3]).to be_instance_of Carrier
         $stdin = STDIN
     end
 end
