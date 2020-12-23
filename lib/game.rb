@@ -2,11 +2,12 @@ require_relative 'player'
 
 class Game
 
-    attr_reader :player_1, :player_2
+    attr_reader :player_1, :player_2, :winner
 
     def initialize
         @player_1 = Player.new
         @player_2 = Player.new
+        @winner = nil
     end
 
     def position_ships(player)
@@ -28,6 +29,7 @@ class Game
     end
 
     def player_1_take_turn
+        check_for_winner
         puts "Player 1, prepare to fire."
         puts "Enter the longitude you would like to strike."
         y_index = gets.chomp
@@ -37,11 +39,27 @@ class Game
     end
 
     def player_2_take_turn
-        puts "Player 1, prepare to fire."
+        check_for_winner
+        puts "Player 2, prepare to fire."
         puts "Enter the longitude you would like to strike."
         y_index = gets.chomp
         puts "Enter the latitude you would like to strike."
         x_index = gets.chomp
         @player_2.fire(@player_1, y_index.to_i, x_index.to_i)
+    end
+
+    private
+
+    def check_for_winner
+        case 
+        when @player_2.active_ships.empty?
+            @winner = @player_1
+            puts "Player 1 wins!"
+            return
+        when @player_1.active_ships.empty?
+            @winner = @player_2
+            puts "Player 2 wins!"
+            return
+        end
     end
 end
