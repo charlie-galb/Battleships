@@ -3,7 +3,7 @@ require_relative 'destroyer'
 
 class Player
 
-    attr_reader :board, :unpositioned_ships
+    attr_reader :board, :unpositioned_ships, :active_ships
 
     def initialize(unpositioned_ships = [Carrier.new, Destroyer.new])
         @board = Array.new(8) {Array.new(8) {"O"}}
