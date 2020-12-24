@@ -109,6 +109,9 @@ describe 'Features' do
         game = Game.new
         io = StringIO.new
         io.puts"blancmange"
+        io.puts"87"
+        io.puts"one"
+        io.puts"87"
         io.puts"1"
         io.puts"Vertical"
         io.puts"4"
@@ -120,5 +123,6 @@ describe 'Features' do
         io.rewind
         $stdin = io
         expect{game.position_ships(game.player_1)}.to_not raise_error
+        expect(game.player_1.unpositioned_ships).to be_empty
     end
 end
