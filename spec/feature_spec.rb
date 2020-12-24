@@ -1,7 +1,7 @@
 require 'game'
 
 describe 'Features' do
-    it'can play out a single player game' do
+    it'can play out a single player game if the players act as expected' do
         game = Game.new
         expect(game.player_1).to be_instance_of Player
         expect(game.player_2).to be_instance_of Player
@@ -103,5 +103,22 @@ describe 'Features' do
         expect(game.player_2.board[1][0]).to eq "X"
         expect(game.player_2.board[1][0]).to eq "X"
         $stdin = STDIN
+    end
+
+    it 'reiterates choose ship commands until the player enters a valid value' do
+        game = Game.new
+        io = StringIO.new
+        io.puts"blancmange"
+        io.puts"1"
+        io.puts"Vertical"
+        io.puts"4"
+        io.puts"3"
+        io.puts"0"
+        io.puts"Horizontal"
+        io.puts"1"
+        io.puts"0"
+        io.rewind
+        $stdin = io
+        expect{game.position_ships(game.player_1)}.to_not raise_error
     end
 end
