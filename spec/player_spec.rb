@@ -14,6 +14,7 @@ describe Player do
                 player_1.position_ship(carrier, "Horizontal", 0, 0)
                 expect(player_1.board[0][0]).to eq carrier
                 expect(player_1.board[0][4]).to eq carrier
+                expect(player_1.active_ships).to eq [carrier]
                 expect(player_1.unpositioned_ships).to eq [destroyer]
             end
             it "can place ships vertically on the board" do
@@ -22,6 +23,7 @@ describe Player do
                 expect(player_1.board[1][0]).to eq destroyer
                 expect(player_1.board[3][0]).to eq destroyer
                 expect(player_1.board[7][0]).to eq "O"
+                expect(player_1.active_ships).to eq [destroyer]
                 expect(player_1.unpositioned_ships).to eq [carrier]
             end
             it "raises an error if a player tries to place ships horizontally off the board" do
