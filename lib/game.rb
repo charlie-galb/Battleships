@@ -12,11 +12,7 @@ class Game
 
     def position_ships(player)
         until player.unpositioned_ships.length == 0
-            puts "Type the number of the ship you want to position:"
-            player.unpositioned_ships.each_with_index do |ship, index|
-                puts "#{index}: #{ship}"
-            end
-            ship_index = gets.chomp
+            ship_index = take_ship_index(player)
             puts "Vertical or horizontal?"
             orientation = gets.chomp
             puts "Where on the y-axis would you like to place it?"
@@ -59,5 +55,24 @@ class Game
             @winner = @player_2
             puts "Player 2 wins!"
         end
+    end
+
+    def take_ship_index(player)
+        valid_ship_index = false
+        until valid_ship_index
+            puts "Type the number of the ship you want to position:"
+            player.unpositioned_ships.each_with_index do |ship, index|
+                puts "#{index}: #{ship}"
+            end
+            ship_index = gets.chomp
+            if ship_index_is_valid?(ship_index, player) 
+                valid_ship_index = true
+            end
+        end
+        return ship_index
+    end
+
+    def ship_index_is_valid?(ship_index, player)
+       ship_index.to_i.to_s == ship_index && ship_index.to_i <= (player.unpositioned_ships.length - 1)
     end
 end
