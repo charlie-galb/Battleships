@@ -17,6 +17,7 @@ class Player
         elsif orientation.downcase == "vertical"
            position_vertically(ship, y_index, x_index)
         end
+        @active_ships << ship
         @unpositioned_ships.delete(ship)
     end
 
@@ -28,6 +29,7 @@ class Player
         if !@board[y_index][x_index].is_a?(String)
             @board[y_index][x_index].take_hit
             if @board[y_index][x_index].sunk?
+                @active_ships.delete(@board[y_index][x_index])
                 @board[y_index][x_index] = "X"
                 return "You sunk their battleship!"
             else
