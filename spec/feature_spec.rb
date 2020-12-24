@@ -146,4 +146,26 @@ describe 'Features' do
         expect(game.player_1.unpositioned_ships).to be_empty
         $stdin = STDIN
     end
+
+    it 'reiterates choose board index position commands until the player enters a valid value' do
+        game = Game.new
+        io = StringIO.new
+        io.puts"1"
+        io.puts"Vertical"
+        io.puts"Incorrect"
+        io.puts"4"
+        io.puts"Incorrect"
+        io.puts"Incorrect"
+        io.puts"Incorrect"
+        io.puts"3"
+        io.puts"0"
+        io.puts"Horizontal"
+        io.puts"1"
+        io.puts"0"
+        io.rewind
+        $stdin = io
+        expect{game.position_ships(game.player_1)}.to_not raise_error
+        expect(game.player_1.unpositioned_ships).to be_empty
+        $stdin = STDIN
+    end
 end
