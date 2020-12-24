@@ -14,7 +14,7 @@ class Game
         until player.unpositioned_ships.length == 0
             ship_index = take_ship_index(player)
             puts "Vertical or horizontal?"
-            orientation = gets.chomp
+            orientation = take_orientation
             puts "Where on the y-axis would you like to place it?"
             y_index = gets.chomp
             puts "Where on the x-axis would you like to place it?"
@@ -74,5 +74,21 @@ class Game
 
     def ship_index_is_valid?(ship_index, player)
        ship_index.to_i.to_s == ship_index && ship_index.to_i <= (player.unpositioned_ships.length - 1)
+    end
+
+    def take_orientation
+        valid_orientation = false
+        until valid_orientation
+            puts "Vertical or horizontal?"
+            orientation = gets.chomp
+            if orientation_is_valid?(orientation) 
+                valid_orientation = true
+            end
+        end
+        return orientation
+    end
+
+    def orientation_is_valid?(orientation)
+        orientation.downcase == "horizontal" || orientation.downcase == "vertical"
     end
 end
