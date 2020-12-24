@@ -14,11 +14,13 @@ class Player
     def position_ship(ship, orientation, y_index, x_index)
         if orientation.downcase == "horizontal"
            position_horizontally(ship, y_index, x_index)
+           @active_ships << ship
+           @unpositioned_ships.delete(ship)
         elsif orientation.downcase == "vertical"
            position_vertically(ship, y_index, x_index)
+           @active_ships << ship
+           @unpositioned_ships.delete(ship)
         end
-        @active_ships << ship
-        @unpositioned_ships.delete(ship)
     end
 
     def fire(enemy, y_index, x_index)
