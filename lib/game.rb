@@ -13,12 +13,9 @@ class Game
     def position_ships(player)
         until player.unpositioned_ships.length == 0
             ship_index = take_ship_index(player)
-            puts "Vertical or horizontal?"
             orientation = take_orientation
-            puts "Where on the y-axis would you like to place it?"
-            y_index = gets.chomp
-            puts "Where on the x-axis would you like to place it?"
-            x_index = gets.chomp
+            y_index = take_board_index("y-axis", player)
+            x_index = take_board_index("x-axis", player)
             ship = player.unpositioned_ships[ship_index.to_i]
             player.position_ship(ship, orientation, y_index.to_i, x_index.to_i)
         end
@@ -90,5 +87,21 @@ class Game
 
     def orientation_is_valid?(orientation)
         orientation.downcase == "horizontal" || orientation.downcase == "vertical"
+    end
+
+    def take_board_index(axis, player)
+        valid_board_index = false
+        until valid_board_index
+           puts "Where on the #{axis} would you like to place it?"
+            board_index = gets.chomp
+            if board_index_is_valid?(board_index, player) 
+                valid_board_index = true
+            end
+        end
+        return board_index
+    end
+
+    def board_index_is_valid?(board_index, player)
+       board_index.to_i.to_s == board_index && board_index.to_i <= 7
     end
 end
