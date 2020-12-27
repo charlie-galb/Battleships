@@ -92,7 +92,7 @@ class Game
     def take_board_index(axis, player)
         valid_board_index = false
         until valid_board_index
-           puts "Where on the #{axis} would you like to place it?"
+           puts "Where on the #{axis} would you like to place it (0-7)?"
             board_index = gets.chomp
             if board_index_is_valid?(board_index, player) 
                 valid_board_index = true
