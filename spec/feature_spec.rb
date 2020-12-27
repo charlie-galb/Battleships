@@ -168,4 +168,28 @@ describe 'Features' do
         expect(game.player_1.unpositioned_ships).to be_empty
         $stdin = STDIN
     end
+
+    context "when player tries to place ships on top of each other" do 
+        it 'reiterates positioning until it receives valid input' do
+            game = Game.new
+            io = StringIO.new
+            io.puts"1"
+            io.puts"Vertical"
+            io.puts"4"
+            io.puts"3"
+            io.puts"0"
+            io.puts"Horizontal"
+            io.puts"4"
+            io.puts"3"
+            io.puts"0"
+            io.puts"Horizontal"
+            io.puts"1"
+            io.puts"0"
+            io.rewind
+            $stdin = io
+            expect{game.position_ships(game.player_1)}.to_not raise_error
+            expect(game.player_1.unpositioned_ships).to be_empty
+            $stdin = STDIN
+        end
+    end
 end
