@@ -26,21 +26,23 @@ describe Player do
                 expect(player_1.active_ships).to eq [destroyer]
                 expect(player_1.unpositioned_ships).to eq [carrier]
             end
-            it "raises an error if a player tries to place ships horizontally off the board" do
+            it "does not allow a player to place ships horizontally off the board" do
                 allow(destroyer).to receive(:size).and_return(4)
-                expect{ player_1.position_ship(destroyer, "Vertical", 6, 0)}.to raise_error  "Not enough space to put your ship here!"
+                p player_1.unpositioned_ships
+                player_1.position_ship(destroyer, "Horizontal", 6, 6)
+                p player_1.unpositioned_ships
                 expect(player_1.unpositioned_ships).to eq [carrier, destroyer]
             end
-            it "raises an error if a player tries to place ships vertically off the board" do
+            it "does not allow a player to place ships vertically off the board" do
                 allow(destroyer).to receive(:size).and_return(4)
-                expect{player_1.position_ship(destroyer, "Horizontal", 6, 6)}.to raise_error  "Not enough space to put your ship here!"
+                player_1.position_ship(destroyer, "Horizontal", 6, 6)
                 expect(player_1.unpositioned_ships).to eq [carrier, destroyer]
             end
-            it "raises an error if a player tries to place ships on top of each other" do
+            it "does not allow a player to place ships on top of each other" do
                 allow(destroyer).to receive(:size).and_return(4)
                 allow(carrier).to receive(:size).and_return(5)
                 player_1.position_ship(destroyer, "Horizontal", 6, 0)
-                expect{player_1.position_ship(carrier, "Vertical", 3, 2)}.to raise_error(RuntimeError, /Space already/)
+                player_1.position_ship(carrier, "Vertical", 3, 2)
                 expect(player_1.unpositioned_ships).to eq [carrier]
             end
         end
