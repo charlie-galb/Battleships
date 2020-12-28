@@ -192,4 +192,39 @@ describe 'Features' do
             $stdin = STDIN
         end
     end
+
+    context "when player tries to enter invalid aiming coordinates" do 
+        it 'reiterates command until it receives valid input' do
+            game = Game.new
+            io = StringIO.new
+            io.puts"1"
+            io.puts"Vertical"
+            io.puts"4"
+            io.puts"3"
+            io.puts"0"
+            io.puts"Horizontal"
+            io.puts"1"
+            io.puts"0"
+            io.rewind
+            $stdin = io
+            game.position_ships(game.player_1)
+            io.rewind
+            $stdin = io
+            game.position_ships(game.player_2)
+            io = StringIO.new
+            io.puts"wrong"
+            io.puts"wrong"
+            io.puts"4"
+            io.puts"wrong"
+            io.puts"3"
+            io.rewind
+            $stdin = io
+            game.player_1_take_turn 
+            expect(game.player_2.board[4][3]).to eq "X"
+            expect(game.player_2.board[6][5]).to eq "O"
+            p game.player_1.shots_history
+            p game.player_2.board
+            $stdin = STDIN
+        end
+    end
 end
