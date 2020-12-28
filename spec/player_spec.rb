@@ -52,6 +52,7 @@ describe Player do
         context "when firing at another player's board" do
             it "can miss" do
                 expect(player_1.fire(player_2, 0, 3)).to eq "Miss"
+                expect(player_1.shots_history[:misses]).to eq [[0, 3]]
             end
             it "can hit" do
                 allow(carrier).to receive(:size).and_return(5)
@@ -59,6 +60,7 @@ describe Player do
                 allow(carrier).to receive(:sunk?).and_return(false)
                 player_2.position_ship(carrier, "Vertical", 0, 0)
                 expect(player_1.fire(player_2, 0, 0)).to eq "Hit"
+                expect(player_1.shots_history[:hits]).to eq [[0, 0]]
             end
             it "can sink a ship" do
                 allow(carrier).to receive(:size).and_return(5)
