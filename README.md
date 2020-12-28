@@ -1,5 +1,11 @@
 # Battleships  
 
+This is a two-player game that runs in the command line, designed according to the user stories below. It's purpose, for me, was to practise TDD and OOP principles during the holiday period. 
+
+## How to play  
+
+Simply run `ruby lib/run_game.rb` and follow the instructions. 
+
 ## User Stories  
 
 ```
