@@ -3,12 +3,13 @@ require_relative 'destroyer'
 
 class Player
 
-    attr_reader :board, :unpositioned_ships, :active_ships
+    attr_reader :board, :unpositioned_ships, :active_ships, :shots_history
 
     def initialize(unpositioned_ships = [Carrier.new, Destroyer.new])
         @board = Array.new(8) {Array.new(8) {"O"}}
         @unpositioned_ships = unpositioned_ships
         @active_ships = []
+        @shots_history = { hits: [], misses: [] }
     end
 
     def position_ship(ship, orientation, y_index, x_index)
@@ -20,7 +21,14 @@ class Player
     end
 
     def fire(enemy, y_index, x_index)
-        enemy.take_fire(y_index, x_index)
+        result = enemy.take_fire(y_index, x_index)
+        if result != "Miss"
+            @shots_history[:hits] << [y_index, x_index]
+        else
+            @shots_history[:misses] << [y_index, x_index]
+        end
+        puts result
+        result
     end
 
     def take_fire(y_index, x_index)
