@@ -23,6 +23,8 @@ class Game
 
     def player_1_take_turn
         puts "Player 1, prepare to fire."
+        puts "Hits: #{@player_1.shots_history[:hits]}"
+        puts "Misses: #{@player_1.shots_history[:misses]}"
         puts "Enter the longitude you would like to strike."
         y_index = gets.chomp
         puts "Enter the latitude you would like to strike."
@@ -33,6 +35,9 @@ class Game
 
     def player_2_take_turn
         puts "Player 2, prepare to fire."
+        puts "Shots so far..."
+        puts "Hits: #{@player_2.shots_history[:hits]}"
+        puts "Misses: #{@player_2.shots_history[:misses]}"
         puts "Enter the longitude you would like to strike."
         y_index = gets.chomp
         puts "Enter the latitude you would like to strike."
