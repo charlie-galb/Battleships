@@ -11,6 +11,7 @@ class Game
     end
 
     def position_ships(player)
+        player == @player_1 ? puts("Player 1...") : puts("Player 2...")
         until player.unpositioned_ships.length == 0
             ship_index = take_ship_index(player)
             orientation = take_orientation
@@ -26,9 +27,9 @@ class Game
         puts "Hits: #{@player_1.shots_history[:hits]}"
         puts "Misses: #{@player_1.shots_history[:misses]}"
         puts "Enter the longitude you would like to strike."
-        y_index = gets.chomp
+        y_index = take_shot_coordinate
         puts "Enter the latitude you would like to strike."
-        x_index = gets.chomp
+        x_index = take_shot_coordinate
         @player_1.fire(@player_2, y_index.to_i, x_index.to_i)
         check_for_winner
     end
@@ -39,9 +40,9 @@ class Game
         puts "Hits: #{@player_2.shots_history[:hits]}"
         puts "Misses: #{@player_2.shots_history[:misses]}"
         puts "Enter the longitude you would like to strike."
-        y_index = gets.chomp
+        y_index = take_shot_coordinate
         puts "Enter the latitude you would like to strike."
-        x_index = gets.chomp
+        x_index = take_shot_coordinate
         @player_2.fire(@player_1, y_index.to_i, x_index.to_i)
         check_for_winner
     end
@@ -57,6 +58,18 @@ class Game
             @winner = @player_2
             puts "Player 2 wins!"
         end
+    end
+
+    def take_shot_coordinate
+        valid_coordinate = false
+        until valid_coordinate
+            coordinate = gets.chomp
+            if board_index_is_valid?(coordinate)
+                valid_coordinate = true
+            end
+        end
+
+        return coordinate
     end
 
     def take_ship_index(player)
@@ -99,14 +112,14 @@ class Game
         until valid_board_index
            puts "Where on the #{axis} would you like to place it (0-7)?"
             board_index = gets.chomp
-            if board_index_is_valid?(board_index, player) 
+            if board_index_is_valid?(board_index) 
                 valid_board_index = true
             end
         end
         return board_index
     end
 
-    def board_index_is_valid?(board_index, player)
+    def board_index_is_valid?(board_index)
        board_index.to_i.to_s == board_index && board_index.to_i <= 7
     end
 end
