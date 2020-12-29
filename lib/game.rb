@@ -20,12 +20,14 @@ class Game
             ship = player.unpositioned_ships[ship_index.to_i]
             player.position_ship(ship, orientation, y_index.to_i, x_index.to_i)
         end
+        # So that the other player can't see where you've positioned your ships when they take their turn
+        10.times { puts "*" }
     end
 
     def player_1_take_turn
         puts "Player 1, prepare to fire."
-        puts "Hits: #{@player_1.shots_history[:hits]}"
-        puts "Misses: #{@player_1.shots_history[:misses]}"
+        puts "Record of shots:"
+        print_2d_array(@player_1.shots_record)
         puts "Enter the longitude you would like to strike."
         y_index = take_shot_coordinate
         puts "Enter the latitude you would like to strike."
@@ -37,8 +39,8 @@ class Game
     def player_2_take_turn
         puts "Player 2, prepare to fire."
         puts "Shots so far..."
-        puts "Hits: #{@player_2.shots_history[:hits]}"
-        puts "Misses: #{@player_2.shots_history[:misses]}"
+        puts "Record of shots:"
+        print_2d_array(@player_2.shots_record)
         puts "Enter the longitude you would like to strike."
         y_index = take_shot_coordinate
         puts "Enter the latitude you would like to strike."
@@ -122,4 +124,14 @@ class Game
     def board_index_is_valid?(board_index)
        board_index.to_i.to_s == board_index && board_index.to_i <= 7
     end
+
+    def print_2d_array(array)
+        array.each do |arr|
+            arr.each do |item|
+                print "#{item} "
+            end
+            print "\n"
+        end
+    end
+
 end
