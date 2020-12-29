@@ -222,8 +222,6 @@ describe 'Features' do
             game.player_1_take_turn 
             expect(game.player_2.board[4][3]).to eq "X"
             expect(game.player_2.board[6][5]).to eq "O"
-            p game.player_1.shots_history
-            p game.player_2.board
             $stdin = STDIN
         end
     end
