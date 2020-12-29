@@ -21,7 +21,7 @@ class Game
             player.position_ship(ship, orientation, y_index.to_i, x_index.to_i)
         end
         # So that the other player can't see where you've positioned your ships when they take their turn
-        10.times { puts "*" }
+        20.times { puts "*" }
     end
 
     def player_1_take_turn
