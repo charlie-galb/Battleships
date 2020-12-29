@@ -99,7 +99,7 @@ describe 'Features' do
         io.puts"0"
         io.rewind
         $stdin = io
-        expect{game.player_1_take_turn}.to  output(/Player 1 wins!/).to_stdout
+        expect{game.player_1_take_turn}.to output(/Player 1 wins!/).to_stdout
         expect(game.player_2.board[1][0]).to eq "X"
         expect(game.player_2.board[1][0]).to eq "X"
         $stdin = STDIN
