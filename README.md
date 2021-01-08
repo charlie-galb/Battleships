@@ -1,6 +1,6 @@
 # Battleships  
 
-This is a two-player game that runs in the command line, designed according to the user stories below. It's purpose, for me, was to practise TDD and OOP principles during the holiday period. 
+This is a two-player game that runs in the command line, designed according to the user stories below. Its purpose, for me, was to practise TDD and OOP principles during the holiday period. 
 
 ## How to play  
 
